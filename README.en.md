@@ -44,7 +44,7 @@ Markdown notes are a single column. A screenshot of one fits little content and 
 
 ## 🖼️ Gallery
 
-> Rendered from [`example/http-caching.md`](example/http-caching.md): wide 16:9, 3 columns, 12px. The whole note fits on a single image.
+> Page 1 of the author's real interview-prep note (in Chinese), rendered at wide 16:9, 3 columns, 8px, 2x scale (3840×2160). The whole note takes 2 images. Click the image to view it at full size.
 
 <p align="center">
   <img src="docs/images/page-en-1.png" width="100%" alt="Sample output">
