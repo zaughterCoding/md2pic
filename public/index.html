@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>md2pic</title>
+  <link rel="icon" type="image/svg+xml" href="/public/logo.svg">
+  <link rel="stylesheet" href="/public/page.css">
+  <link rel="stylesheet" href="/public/app.css">
+  <script src="/lib/mermaid.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <aside id="side">
+      <div class="brand">
+        <img src="/public/logo.svg" alt="" class="logo">
+        <span class="name">md2pic</span>
+        <span class="sub" data-i18n="brand.sub"></span>
+        <button class="ghost lang" id="langBtn" data-i18n="lang.switch"></button>
+      </div>
+
+      <section class="box">
+        <label class="lbl" data-i18n="note.label"></label>
+        <div class="row">
+          <input id="notePath" data-i18n-placeholder="note.placeholder" spellcheck="false">
+          <button id="loadBtn" data-i18n="note.load"></button>
+        </div>
+        <div class="hint" id="noteInfo"></div>
+      </section>
+
+      <section class="box">
+        <label class="lbl" data-i18n="layout.label"></label>
+        <div class="row settings">
+          <span data-i18n="size.label"></span>
+          <label class="seg"><input type="radio" name="size" value="landscape"><span title="1440×1080" data-i18n="size.landscape"></span></label>
+          <label class="seg"><input type="radio" name="size" value="wide"><span title="1920×1080" data-i18n="size.wide"></span></label>
+          <label class="seg"><input type="radio" name="size" value="portrait"><span title="1080×1440" data-i18n="size.portrait"></span></label>
+        </div>
+        <div class="row settings">
+          <span data-i18n="cols.label"></span>
+          <label class="seg"><input type="radio" name="cols" value="2"><span data-i18n="cols.n" data-n="2"></span></label>
+          <label class="seg"><input type="radio" name="cols" value="3"><span data-i18n="cols.n" data-n="3"></span></label>
+          <label class="seg"><input type="radio" name="cols" value="4"><span data-i18n="cols.n" data-n="4"></span></label>
+        </div>
+        <div class="row settings">
+          <span data-i18n="scale.label"></span>
+          <label class="seg"><input type="radio" name="scale" value="2"><span data-i18n-title="scale.tip">2x</span></label>
+          <label class="seg"><input type="radio" name="scale" value="1"><span>1x</span></label>
+        </div>
+        <div class="row settings">
+          <span data-i18n="font.label"></span><input id="fontSize" type="number" min="8" max="40" step="1">
+          <span data-i18n="sig.label"></span><input id="signature" class="sig">
+        </div>
+      </section>
+
+      <section class="box outline-box">
+        <div class="outline-head">
+          <label class="lbl" data-i18n="range.label"></label>
+          <span class="hint" id="rangeInfo"></span>
+          <button class="ghost" id="allBtn" data-i18n="range.all"></button>
+        </div>
+        <div class="hint" data-i18n="range.hint"></div>
+        <div id="outline"></div>
+      </section>
+
+      <section class="box actions">
+        <button id="exportBtn" class="primary" data-i18n="export.btn"></button>
+        <div class="hint" id="exportInfo"></div>
+      </section>
+    </aside>
+
+    <main id="main">
+      <div id="status" class="status" data-i18n="status.empty"></div>
+      <div id="pages"></div>
+    </main>
+  </div>
+
+  <div id="lightbox" hidden><div id="lbInner"></div></div>
+  <div id="measure" class="md"></div>
+  <div id="exportRoot"></div>
+
+  <script src="/public/i18n.js"></script>
+  <script src="/public/layout.js"></script>
+  <script src="/public/app.js"></script>
+</body>
+</html>

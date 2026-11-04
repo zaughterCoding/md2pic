@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# local state (contains the path of your own note)
+config.json
+
+# exported images
+*_images/
+
+# editor / tool settings
+.claude/
+.vscode/
+.idea/
+
+# logs & OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
