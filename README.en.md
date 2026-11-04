@@ -13,6 +13,7 @@
 [![Playwright](https://img.shields.io/badge/playwright--core-1.64-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-8A7259)](#requirements)
 [![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%7C%20English-8A7259)](#language)
+[![License: MIT](https://img.shields.io/badge/License-MIT-C08551.svg)](LICENSE)
 
 [简体中文](README.md) | English
 
@@ -43,11 +44,10 @@ Markdown notes are a single column. A screenshot of one fits little content and 
 
 ## 🖼️ Gallery
 
-> Rendered from [`example/http-caching.md`](example/http-caching.md): landscape 4:3, 3 columns, 22px.
+> Rendered from [`example/http-caching.md`](example/http-caching.md): wide 16:9, 3 columns, 12px. The whole note fits on a single image.
 
 <p align="center">
-  <img src="docs/images/page-en-1.png" width="49%" alt="Sample page 1">
-  <img src="docs/images/page-en-2.png" width="49%" alt="Sample page 2">
+  <img src="docs/images/page-en-1.png" width="100%" alt="Sample output">
 </p>
 
 <details>
@@ -184,3 +184,7 @@ Relative image paths are resolved from the note's folder, so check that the path
 - [highlight.js](https://highlightjs.org/): syntax highlighting
 - [Mermaid](https://mermaid.js.org/): diagrams
 - [Playwright](https://playwright.dev/): browser automation
+
+## 📄 License
+
+Released under the [MIT License](LICENSE).

@@ -13,6 +13,7 @@
 [![Playwright](https://img.shields.io/badge/playwright--core-1.64-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-8A7259)](#环境要求)
 [![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%7C%20English-8A7259)](#语言切换)
+[![License: MIT](https://img.shields.io/badge/License-MIT-C08551.svg)](LICENSE)
 
 简体中文 | [English](README.en.md)
 
@@ -43,11 +44,10 @@ Markdown 笔记是单栏的，直接截图发出去，一张图放不了多少�
 
 ## 🖼️ 效果展示
 
-> 以下图片由 [`example/HTTP 缓存.md`](example/HTTP%20缓存.md) 生成，设置为横 4:3、3 栏、22px。
+> 以下图片由 [`example/HTTP 缓存.md`](example/HTTP%20缓存.md) 生成，设置为横 16:9、3 栏、12px。整篇笔记正好排进一张图。
 
 <p align="center">
-  <img src="docs/images/page-zh-1.png" width="49%" alt="示例第 1 页">
-  <img src="docs/images/page-zh-2.png" width="49%" alt="示例第 2 页">
+  <img src="docs/images/page-zh-1.png" width="100%" alt="示例输出">
 </p>
 
 <details>
@@ -184,3 +184,7 @@ md2pic 依次尝试调用系统里的 Microsoft Edge 和 Google Chrome，请确�
 - [highlight.js](https://highlightjs.org/)：代码高亮
 - [Mermaid](https://mermaid.js.org/)：图表渲染
 - [Playwright](https://playwright.dev/)：浏览器截图
+
+## 📄 许可证
+
+本项目基于 [MIT License](LICENSE) 开源。
