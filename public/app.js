@@ -240,6 +240,27 @@
     if (note) $('#noteInfo').textContent = t('note.info', { name: note.name, h: note.headings.length, a: note.atoms.length });
   }
 
+  // Open the OS file dialog (via the server) and load the chosen note.
+  async function pickNote() {
+    const btn = $('#pickBtn');
+    btn.disabled = true;
+    const before = $('#noteInfo').textContent;
+    $('#noteInfo').textContent = t('note.picking');
+    try {
+      const r = await api('/api/pick', { title: t('note.pickTitle') });
+      if (r.path) {
+        $('#notePath').value = r.path;
+        await loadNote(r.path);
+      } else {
+        $('#noteInfo').textContent = before; // cancelled
+      }
+    } catch (e) {
+      $('#noteInfo').textContent = I18N.errorText(e);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
   async function doExport() {
     if (!result) return;
     const btn = $('#exportBtn');
@@ -322,6 +343,7 @@
       scheduleLayout(); // "continued" labels on pages follow the language
     };
     $('#loadBtn').onclick = () => loadNote($('#notePath').value);
+    $('#pickBtn').onclick = pickNote;
     $('#notePath').addEventListener('keydown', (e) => { if (e.key === 'Enter') loadNote($('#notePath').value); });
     document.querySelectorAll('input[name=cols], input[name=size], input[name=scale]').forEach((r) => r.addEventListener('change', onSettingsChange));
     $('#fontSize').addEventListener('input', onSettingsChange);

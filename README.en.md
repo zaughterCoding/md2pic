@@ -38,6 +38,7 @@ Markdown notes are a single column. A screenshot of one fits little content and 
 - **Full Markdown support**: syntax highlighting, tables, Mermaid diagrams, local and remote images, block quotes and task lists.
 - **Pick a range**: choose start and end headings in the outline and export only that part.
 - **Live preview**: changes re-layout instantly. Hover to exclude a page and click to zoom.
+- **Native file picker**: click **Browse…** to choose a note in Explorer / Finder instead of typing its path.
 - **Remembers your session**: note path, range and layout settings are restored on the next launch.
 - **Bilingual UI**: switch between Chinese and English with one click (Chinese by default).
 - **No browser download**: export uses the Edge or Chrome already on your system instead of downloading Chromium.
@@ -86,7 +87,7 @@ Your browser opens <http://localhost:3456> automatically. On Windows you can als
 
 ## 📖 Usage
 
-1. **Load a note**: enter the full path of a local `.md` file at the top left and click **Load** (or press Enter).
+1. **Load a note**: click **Browse…** to choose a `.md` file in the system file dialog, or type its full path and click **Load** (or press Enter).
 2. **Choose a range**: in the **Range** outline, click **From** and **To** next to headings. The end heading includes all of its sub-headings. Click **All** to export the whole note.
 3. **Adjust the layout**: pick the size, columns, scale, font size (8–40px) and signature. The preview updates live.
 4. **Review**: hover a thumbnail to **Exclude** it; page numbers update automatically. Click a thumbnail to zoom in.

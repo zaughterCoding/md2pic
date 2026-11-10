@@ -3,7 +3,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { exec, execFile } = require('child_process');
 const MarkdownIt = require('markdown-it');
 const hljs = require('highlight.js');
 
@@ -260,6 +260,46 @@ async function exportPages(exclude) {
   }
 }
 
+// ---------- native file picker ----------
+// Browsers never reveal a picked file's full path, so the server opens the OS dialog itself.
+const PS_PICK = `
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Add-Type -AssemblyName System.Windows.Forms
+$owner = New-Object System.Windows.Forms.Form -Property @{ TopMost = $true; ShowInTaskbar = $false }
+$d = New-Object System.Windows.Forms.OpenFileDialog
+$d.Filter = 'Markdown (*.md;*.markdown)|*.md;*.markdown|All files (*.*)|*.*'
+$d.Title = $env:MD2PIC_PICK_TITLE
+if ($env:MD2PIC_PICK_DIR -and (Test-Path -LiteralPath $env:MD2PIC_PICK_DIR)) { $d.InitialDirectory = $env:MD2PIC_PICK_DIR }
+if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { [Console]::Out.Write($d.FileName) }
+$owner.Dispose()
+`;
+
+function pickFile(initialDir, title) {
+  return new Promise((resolve, reject) => {
+    let cmd, args;
+    const env = { ...process.env, MD2PIC_PICK_DIR: initialDir || '', MD2PIC_PICK_TITLE: title || 'md2pic' };
+    if (process.platform === 'win32') {
+      cmd = 'powershell.exe';
+      args = ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-Command', PS_PICK];
+    } else if (process.platform === 'darwin') {
+      const where = initialDir ? ` default location (POSIX file ${JSON.stringify(initialDir)})` : '';
+      cmd = 'osascript';
+      args = ['-e', `POSIX path of (choose file with prompt ${JSON.stringify(title || 'md2pic')}${where})`];
+    } else {
+      cmd = 'zenity';
+      args = ['--file-selection', '--title=' + (title || 'md2pic'), '--file-filter=Markdown | *.md *.markdown', '--file-filter=All files | *'];
+      if (initialDir) args.push('--filename=' + path.join(initialDir, path.sep));
+    }
+    execFile(cmd, args, { env, windowsHide: true, maxBuffer: 1 << 20 }, (err, stdout) => {
+      const picked = String(stdout || '').trim();
+      if (picked) return resolve(picked);
+      // Cancelling the dialog exits with an error on macOS / Linux; treat it as "nothing picked".
+      if (err && err.code === 'ENOENT') return reject(Object.assign(new Error(`${cmd} not found`), { code: 'PICKER_UNAVAILABLE' }));
+      resolve('');
+    });
+  });
+}
+
 // ---------- http ----------
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
@@ -337,6 +377,13 @@ const server = http.createServer(async (req, res) => {
       } finally {
         exporting = false;
       }
+    }
+    if (p === '/api/pick' && req.method === 'POST') {
+      const body = await readBody(req);
+      const cfg = readConfig();
+      const dir = cfg.notePath ? path.dirname(cfg.notePath) : '';
+      const picked = await pickFile(dir, body.title);
+      return send(res, 200, { path: picked ? path.resolve(picked) : '' });
     }
     if (p === '/api/open-dir' && req.method === 'POST') {
       const body = await readBody(req);

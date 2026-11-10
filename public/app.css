@@ -17,6 +17,7 @@ body { font-family: "Microsoft YaHei UI", "Microsoft YaHei", sans-serif; backgro
 input { font: inherit; border: 1px solid #DDD2BF; border-radius: 6px; padding: 6px 8px; background: #FFFDF9; color: inherit; min-width: 0; }
 input:focus { outline: 2px solid #E8D9C0; border-color: #C9A77F; }
 #notePath { flex: 1; }
+.row > button { flex: none; white-space: nowrap; }
 #fontSize { width: 60px; }
 .sig { flex: 1; }
 button { font: inherit; border: 1px solid #D6C7AE; background: #FFF8EC; color: #6B4A2A; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
