@@ -280,7 +280,7 @@ function pickFile(initialDir, title) {
     const env = { ...process.env, MD2PIC_PICK_DIR: initialDir || '', MD2PIC_PICK_TITLE: title || 'md2pic' };
     if (process.platform === 'win32') {
       cmd = 'powershell.exe';
-      args = ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-Command', PS_PICK];
+      args = ['-NoProfile', '-STA', '-Command', PS_PICK];
     } else if (process.platform === 'darwin') {
       const where = initialDir ? ` default location (POSIX file ${JSON.stringify(initialDir)})` : '';
       cmd = 'osascript';
